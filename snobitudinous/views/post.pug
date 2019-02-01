@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  form(method='POST', action='/posts/'+post._id)
+    #form-group
+      h1.editing.post-title= post.title
+      //-input.form-control.editing.edited-post-title(name='titleEditor', type='text', maxlength=400, value=post.title, style='display:none')
+      h5 
+        | Posted by 
+        a(href='/users/'+post.author._id) #{post.author.username}
+        |  on 
+        a(href='/topics/'+post.topic._id) #{post.topic.name}
+      h6 #{dateSubmitted}
+      if imageExists
+        .card.card-body.mb-3(style='width: 50%')
+          a(href='/posts/'+post._id+'/image/')
+            img.image-fluid(src='/posts/'+post._id+'/image/', style='width: 100%')
+      p.editing.post-body= post.body
+      //-textarea.form-control.editing.edited-post-body(name='bodyEditor', rows=5, style='display:none')=post.body
+      if user
+        if (user.id == post.author._id) && (user.contributesTo != [])
+          br
+          //-a.btn.btn-outline-secondary.edit-post.editing(href='javascript:void(0)') Edit
+          //-button.btn.btn-outline-primary.submit-edit.editing(data-id=post._id, type='submit', style='display:none') Update
+          //-  a.btn.btn-outline-secondary.cancel-edit.editing(href='javascript:void(0)', style='display:none') Cancel
+          a.btn.btn-outline-danger.delete-post(href='javascript:void(0)', data-id=post._id) Delete
+    hr
+    h5= 'Comments (' + post.comments.length + '):'
+    if user
+      form(method='POST', action='/posts/'+post._id)
+        #form-group
+          label Make a Comment
+          .input-group
+            input.form-control(name='comment', type='text')
+            span.input-group-btn
+              input.btn.btn-outline-primary(type='submit',value='Submit')
+  br
+  ul.list-group
+    each comment in post.comments
+      li.list-group-item
+        a(href='/users/'+comment.author._id)= comment.author.username
+        p= comment.body
+        

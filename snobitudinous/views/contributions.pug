@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1 Contributions
+  p To become a contributor, send an email to 
+    strong applications@snobitudinous.com. 
+    | If we like you, we'll send you a code, which you can redeem here to become
+    | a fully fledged contributor to your chosen topic!
+    br
+    form(method='POST', action='/users/account/contributions')
+      label ENTER YOUR CODE HERE:
+      input.form-control(name='code', type='text')
+      br
+      input.btn.btn-outline-primary(type='submit', value='Submit')

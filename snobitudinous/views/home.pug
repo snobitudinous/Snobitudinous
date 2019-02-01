@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  
+  h1 #{title}
+  br
+  //- ul.list-group
+  //-   each page in pages
+  //-     each post in page
+  //-       li.list-group-item
+  //-         a(href="/posts/"+post._id)= post.title
+  ul.list-group
+    each post in posts
+      li.list-group-item
+        a(href='/posts/'+post._id)
+          if post.imageFile
+            image.thumbnail.mr-2(src='/posts/'+post._id+'/image', align='left', data-id=post._id)
+          h4.list-group-item-heading.mt-2.mb-4= post.title
+        p 
+          if post.imageFile || post.body
+            a.btn.btn-outline-secondary.expand-post.mr-2(href='javascript:void(0)', data-id=post._id) ▼
+          |Posted on 
+          a(href='/topics/'+post.topic._id)= post.topic.name
+          
+          if post.imageFile || post.body
+            .expand-item(style='display:none', data-id=post._id)
+              if post.imageFile
+                image(src='/posts/'+post._id+'/image')
+              if post.body.length > 0
+                p.list-group-item-text= post.body

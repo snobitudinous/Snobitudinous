@@ -1,0 +1,69 @@
+doctype html
+html
+  head
+    title Snobitudinous
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Bitter|Satisfy')
+    //-link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
+    //-meta(name='viewport', content='width=device-width initial-scale=1.0')
+  body
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+      .container
+        .navbar-header
+          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.navbar-toggler-icon
+          a.navbar-brand(href='/') Snobitudinous
+        #navbar.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            if user
+              li.nav-item.dropdown
+                a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Snobscriptions
+                .dropdown-menu(aria-labelledby='navbarDropdown')
+                  a.dropdown-item(href='/users/account/subscriptions') Manage
+                  if subscriptions.length > 0
+                    .dropdown-divider
+                    each topic in subscriptions
+                      a.dropdown-item(href='/topics/'+topic._id)= topic.name
+                  else
+                    a.dropdown-item.disabled(href='#') No Subscriptions Yet!
+              if user.contributesTo != []
+                li.nav-item
+                  a.nav-link(href='/posts/submit') Post
+            li.nav-item.dropdown
+              a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Topics
+              .dropdown-menu(aria-labelledby='navbarDropdown')
+                if user
+                  a.dropdown-item(href='/all') All
+                else
+                  a.dropdown-item(href='/') All
+                .dropdown-divider
+                each topic in allTopics
+                    a.dropdown-item(href='/topics/'+topic._id)= topic.name
+          hr
+          ul.navbar-nav.navbar-right
+            if user
+              li.nav-item
+                a.nav-link(href='/users/account') Account 
+              li.nav-item
+                a.nav-link(href='/users/logout') Logout
+            else
+              li.nav-item
+                a.nav-link(href='/users/register') Register
+              li.nav-item
+                a.nav-link(href='/users/login') Login
+    .container
+      br
+      != messages('message', locals)
+      if errors
+        each error in errors
+          .alert.alert-danger #{error.msg}
+      block content
+      br
+      hr
+      footer
+        p Stephen Mitchell 2019
+    script(src='/bower_components/jquery/dist/jquery.js')
+    script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+    script(src='/js/main.js')
+    //-script(src='/js/pagination.js')

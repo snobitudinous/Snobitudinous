@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  h1 Snobscriptions
+  br
+  if subscriptions.length > 0
+    each topic in subscriptions
+      .input-group
+        h4= topic.name
+        span.input-group-btn
+          form(method='POST', action='/users/account/subscriptions/'+topic._id)
+            input.ml-3.btn.btn-outline-danger(type='submit', value='Unsubscribe')
+      p= topic.description
+      hr
+    br
+  else
+    h5 No snobscriptions!
+  br
+  if notSubscribed.length > 0
+    form(method='POST', action='/users/account/subscriptions')
+      #form-group
+        label Topics:
+        .input-group
+          select.form-control(name='topic')
+            each topic in notSubscribed
+              option(value=topic._id)= topic.name
+          span.input-group-btn
+            input.btn.btn-outline-primary(type='submit', value='Subscribe')
+  else
+    h5 You're snobscribed to everything! 
+    br
+    p
+      | You have achieved ultimate snobitude, a level of snobitude only conjectured to be possible
+      | - and even then, by one or two weirdos with CRAZY hair, you know the ones that try to tell
+      | you Steve Jobs was a time traveller. Anywho, spread the love o great one, and know that
+      | everywhere ye walk, there on the earth lies a blessing; one of unreasonable standards,
+      | frightening enthusiasm and ponderous sanctimony; and thankful we are for thee, for from
+      | thine wake doth a more interesting world flourish.

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 About #{thisUser.username}:
+  ul
+    li
+      h6 User since #{dateJoined}
+    if subscriptions
+      li
+        h6 #{subscriptions} snob
+    else
+      li
+        h6 Snoob
+    if contributions
+      li
+        h6 Contributes to #{contributions}
+  br
+  if posts.length > 0
+    h1 #{thisUser.username}'s posts:
+    ul.list-group
+      each post in posts
+        li.list-group-item
+          a(href="/posts/"+post._id)= post.title

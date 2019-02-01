@@ -1,0 +1,35 @@
+.navbar .navbar-header .navbar-brand {
+  /*font-family: 'Bitter', serif;*/
+  font-family: 'Satisfy', cursive;
+  color: MediumSeaGreen;
+  font-size: 32px;
+  padding-left: 10px;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.alert-error{
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.alert-success_msg{
+  color: #3c763d;
+  background-color: #dff0d8;
+  corder-color: #ebccd1;
+}
+
+.thumbnail{
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  background-color: black;
+  align: left;
+}
+
+* {
+ font-family: 'Helvetica', sans-serif;
+}

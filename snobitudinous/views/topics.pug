@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .input-group
+    h1 #{thisTopic.name}
+    if user
+      form(method='POST', action='/topics/'+thisTopic._id)
+          span.input-group-btn
+            input.ml-3.btn(type='submit',value=changeSubStatus, class=btnClass)
+  br
+  p= thisTopic.description
+  br
+  ul.list-group
+    each post in posts
+      li.list-group-item
+        a(href="/posts/"+post._id)= post.title

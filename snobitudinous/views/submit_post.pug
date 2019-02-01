@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1 Submit Post
+  form(method='POST', action='/posts/submit', enctype='multipart/form-data')
+    #form-group
+      label Title:
+      input#title.form-control(name='title', type='text', maxlength=400)
+    br
+    #form-group
+      label Image:
+      .custom-file
+          input.custom-file-input.submit-image#postImg(name='postImg', type='file', accept='image/png,image/gif,image/jpeg')
+          label.custom-file-label.submit-image-label(for='postImg') Choose image (optional)
+    br
+    #form-group
+      label Body (optional):
+      textarea.form-control(name='body', rows=5)
+    br
+    #form-group
+      label Post to:
+      select.form-control(name='topic')
+        each topic in contributions
+          option(value=topic._id)= topic.name
+    br
+    input.btn.btn-outline-primary(type='submit', value='Submit')

@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  h1 Your account
+  br
+  form(method='POST', action='/users/account')
+    #form-group
+      label
+        strong Username: 
+        | #{user.username}
+      input.form-control(name='username', type='text', placeholder='Enter new username', maxlength='45')
+      br
+    #form-group
+      label
+        strong First name: 
+        | #{user.firstname}
+      input.form-control(name='firstname', type='text', placeholder='Enter new first name', maxlength='45')
+      br
+    #form-group
+      label 
+        strong Surname: 
+        | #{user.surname}
+      input.form-control(name='surname', type='text', placeholder='Enter new surname', maxlength='45')
+      br
+    #form-group
+      label
+        strong Email: 
+        | #{user.email}
+      input.form-control(name='email', type='text', placeholder='Enter new email', maxlength='45')
+      br
+    input.btn.btn-outline-primary(type='submit',value='Update')
+    hr
+  a.mb-4.btn.btn-outline-secondary(href='/users/account/password') Change Password
+  br
+  .input-group
+    a.btn.btn-secondary(href='/users/account/subscriptions') Manage snobscriptions
+    span.input-group-btn
+      a.ml-3.btn.btn-secondary(href='/users/account/contributions') Manage contributions
+  hr
+  //-a.mt-5.btn.btn-outline-danger(href='/users/account/delete') Delete Account
